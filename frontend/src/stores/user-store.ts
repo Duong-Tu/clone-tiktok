@@ -14,7 +14,7 @@ export type UserActions = {
   logout: () => void;
 };
 
-export const userStore = create<User & UserActions>()(
+export const useUserStore = create<User & UserActions>()(
   devtools(
     persist(
       (set) => ({
