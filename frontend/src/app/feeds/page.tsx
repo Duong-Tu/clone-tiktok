@@ -1,7 +1,6 @@
-import ProtectedRoute from '@/components/protected-route';
-
+import styles from './feed.module.scss';
 const Feed = () => {
-  return <div>Feed</div>;
+  return <div className={styles['feed']}>feeds page</div>;
 };
 
 export default Feed;

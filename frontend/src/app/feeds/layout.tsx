@@ -1,4 +1,4 @@
-import ProtectedRoute from '@/components/protected-route';
+import ProtectedRoute from '@/route/protected-route';
 import { ReactElement } from 'react';
 
 const FeedLayout = ({ children }: { children: ReactElement }) => {
