@@ -1,4 +1,5 @@
 type SizeIcon = {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
+  fontSize?: string;
 };

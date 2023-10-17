@@ -1,0 +1,51 @@
+.spinner {
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.spinner-child {
+    width: 2rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+}
+
+.spinner-child:nth-child(1) {
+    background: $light-red-color;
+    animation: clockwise $animation-duration-spinner infinite linear;
+}
+
+.spinner-child:nth-child(2) {
+    mix-blend-mode: darken;
+    background: $light-green-color;
+    margin-left: -5px;
+    animation: counter-clockwise $animation-duration-spinner infinite linear;
+}
+
+@keyframes clockwise {
+    0% {
+        transform: translateX(0);
+        width: 20px;
+    }
+
+    25% {
+        width: 25px;
+    }
+
+    50% {
+        transform: translateX(100%);
+        width: 20px;
+    }
+}
+
+@keyframes counter-clockwise {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+}

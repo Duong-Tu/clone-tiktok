@@ -1,0 +1,15 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    padding: 0.6rem 1.6rem;
+    border: none;
+    border-radius: 2px;
+    &-disabled {
+        cursor: default;
+        color: $text-color;
+    }
+}

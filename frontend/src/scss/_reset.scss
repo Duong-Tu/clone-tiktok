@@ -1,33 +1,34 @@
 html {
-  box-sizing: border-box;
-  font-size: 62.5%;
+    box-sizing: border-box;
+    font-size: 62.5%;
 }
 * {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 *,
 *:before,
 *::after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 input,
 textarea,
 select,
 button {
-  outline: none;
+    outline: none;
 }
 
 label,
 button {
-  cursor: pointer;
+    cursor: pointer;
+    background: none;
 }
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 image {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
