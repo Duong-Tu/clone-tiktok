@@ -1,4 +1,4 @@
-export const MessageIcon = ({ width, height }: SizeIcon) => {
+export const MessageIcon = ({ width, height }: IconProperties) => {
     return (
         <svg
             viewBox="0 0 48 48"

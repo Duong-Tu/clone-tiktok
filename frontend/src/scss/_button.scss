@@ -5,9 +5,13 @@
     font-size: 1.6rem;
     line-height: 1.8rem;
     font-weight: 500;
-    padding: 0.6rem 1.6rem;
     border: none;
     border-radius: 2px;
+    padding: 0.6rem 1.6rem;
+    color: $text-color;
+    &-round {
+        border-radius: 50%;
+    }
     &-disabled {
         cursor: default;
         color: $text-color;

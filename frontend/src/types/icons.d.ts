@@ -1,5 +1,7 @@
-type SizeIcon = {
-  width?: string;
-  height?: string;
-  fontSize?: string;
+type IconProperties = {
+    width?: string;
+    height?: string;
+    fontSize?: string;
+    color?: string;
+    isActive?: boolean;
 };

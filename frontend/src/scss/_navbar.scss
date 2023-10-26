@@ -1,0 +1,27 @@
+.menu {
+    &-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+    }
+    &-link {
+        display: block;
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        line-height: 2rem;
+        font-weight: 600;
+        padding: 0.8rem;
+        border-radius: 4px;
+        color: $text-color;
+        &:hover {
+            background: rgba(22, 24, 35, 0.03);
+        }
+        span {
+            margin-left: 0.8rem;
+        }
+        &-active {
+            color: $primary-color;
+        }
+    }
+}

@@ -5,6 +5,7 @@ import { MessageIcon } from '@/icons/messages-icon';
 import { InboxIcon } from '@/icons/inbox-icon';
 import { PlusIcon } from '@/icons/plus-icon';
 import Search from './search';
+import avtImg from '@/assets/images/avt.jpeg';
 
 const Header: React.FC = () => {
     return (
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
                 <Search className="header-search" />
             </div>
             <div className="header-right">
-                <Button className="header-btnUpload">
+                <Button className="header-btnUpload" url="/upload">
                     <PlusIcon width="20" height="20" /> <span>upload</span>
                 </Button>
                 <Button className="header-btnIconOnly">
@@ -27,6 +28,9 @@ const Header: React.FC = () => {
                 </Button>
                 <Button className="header-btnIconOnly">
                     <InboxIcon width="32" height="32" />
+                </Button>
+                <Button className="header-avt" shape="round">
+                    <img src={`${avtImg.src}`} alt="" />
                 </Button>
             </div>
         </header>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CSSProperties, ReactNode } from 'react';
 
 interface ButtonProps {
@@ -33,46 +34,31 @@ const Button = ({
 }: ButtonProps) => {
     const isAnchor = url && url.length > 0;
 
-    const buttonClasses = ['btn'];
-    const buttonStyles = styles || {};
+    let buttonClasses = ['btn', className].filter(Boolean); // remove value invalid
+    const buttonStyles = {
+        ...styles,
+        ...(disabled || loading ? { background: '#d5d5d5', opacity: '0.65' } : {}),
+    };
 
-    if (className) {
-        buttonClasses.push(className);
-    }
+    if (block) buttonClasses.push('btn-block');
 
-    if (block) {
-        buttonClasses.push('btn-block');
-    }
+    if (danger) buttonClasses.push('btn-danger');
 
-    if (danger) {
-        buttonClasses.push('btn-danger');
-    }
+    if (size) buttonClasses.push(`btn-size-${size}`);
+
+    if (type) buttonClasses.push(`btn-type-${type}`);
+
+    if (shape === 'round') buttonClasses.push('btn-round');
 
     if (disabled || loading) {
-        buttonClasses.push('btn-disabled');
-        buttonStyles.background = '#d5d5d5';
-        buttonStyles.opacity = '0.65';
-    }
-
-    if (size) {
-        buttonClasses.push(`btn-size-${size}`);
-    }
-
-    if (type) {
-        buttonClasses.push(`btn-type-${type}`);
-    }
-
-    if (shape === 'round') {
-        buttonClasses.push('btn-round');
-    } else {
-        buttonClasses.push('btn-square');
+        buttonClasses = [...buttonClasses, 'btn-disabled'];
     }
 
     if (isAnchor) {
         return (
-            <a href={url} className={buttonClasses.join('')} style={buttonStyles}>
+            <Link href={url} className={buttonClasses.join(' ')} style={buttonStyles}>
                 {loading ? 'Loading...' : children}
-            </a>
+            </Link>
         );
     }
 
