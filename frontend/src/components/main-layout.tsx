@@ -8,11 +8,11 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
             <div className="mainLayout-header">
                 <Header />
             </div>
-            <div className="mainLayout-center">
+            <div className="mainLayout-content">
                 <div className="mainLayout-sidebar">
                     <Sidebar />
                 </div>
-                <div className="mainLayout-content">{children}</div>
+                <div className="mainLayout-posts">{children}</div>
             </div>
         </div>
     );

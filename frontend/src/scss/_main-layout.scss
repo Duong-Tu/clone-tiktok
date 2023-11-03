@@ -1,15 +1,56 @@
 .mainLayout {
     &-header {
-        padding: 1rem 2rem;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    }
-    &-center {
-        display: flex;
-    }
-    &-sidebar {
-        width: 240px;
+        height: $header-height;
+        background: $white-color;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99;
     }
     &-content {
+        margin-top: $header-height;
+        position: relative;
+    }
+
+    &-sidebar {
+        max-height: 100vh;
+        position: fixed;
+        top: $header-height;
+        left: 0;
+        overflow-y: scroll;
+    }
+
+    &-sidebar::-webkit-scrollbar {
+        width: 0.6rem;
+    }
+
+    &-sidebar::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &-sidebar::-webkit-scrollbar-thumb {
+        border-radius: 5rem;
+        background: $gray-color;
+    }
+
+    &-sidebar::-webkit-scrollbar-track {
+        border-radius: 5rem;
+    }
+
+    &-sidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    &-sidebar:hover::-webkit-scrollbar {
+        display: block;
+    }
+
+    &-posts {
+        position: absolute;
+        left: 24rem;
+        height: 5000px;
         width: 100%;
     }
 }

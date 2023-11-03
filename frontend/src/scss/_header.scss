@@ -3,9 +3,38 @@
     align-items: center;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 0.6rem 2rem;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
     &-left {
         display: flex;
         align-items: center;
+        gap: 1.2rem;
+        min-width: 30rem;
+    }
+
+    &-creatorCenter {
+        padding: 0px 2px;
+        border-radius: 3px;
+        background: linear-gradient(
+            0.25turn,
+            rgb(37, 244, 238) 0px,
+            rgb(37, 244, 238) 50%,
+            rgb(254, 44, 85) 50%,
+            rgb(254, 44, 85) 100%
+        );
+    }
+    &-creatorCenterBtn {
+        border-radius: 3px;
+        background-color: rgb(18, 18, 18);
+        padding: 0 1rem;
+        color: $white-color;
+        font-weight: 600;
+        line-height: 2rem;
+        font-size: 1.4rem;
+    }
+    &-creatorCenterBtn:nth-child(3) {
+        background: $primary-color;
     }
     &-center {
         width: 52rem;
@@ -22,6 +51,7 @@
     &-btnUpload {
         border: 1px solid $gray-border-color;
         background: $white-color;
+        font-weight: 600;
         span {
             margin-left: 4px;
         }
