@@ -1,3 +1,4 @@
+$width-sidebar: 25.6rem;
 .mainLayout {
     &-header {
         height: $header-height;
@@ -11,7 +12,6 @@
     }
     &-content {
         margin-top: $header-height;
-        position: relative;
     }
 
     &-sidebar {
@@ -20,37 +20,12 @@
         top: $header-height;
         left: 0;
         overflow-y: scroll;
-    }
-
-    &-sidebar::-webkit-scrollbar {
-        width: 0.6rem;
-    }
-
-    &-sidebar::-webkit-scrollbar-button {
-        display: none;
-    }
-
-    &-sidebar::-webkit-scrollbar-thumb {
-        border-radius: 5rem;
-        background: $gray-color;
-    }
-
-    &-sidebar::-webkit-scrollbar-track {
-        border-radius: 5rem;
-    }
-
-    &-sidebar::-webkit-scrollbar {
-        display: none;
-    }
-
-    &-sidebar:hover::-webkit-scrollbar {
-        display: block;
+        padding: 0 0.4rem;
+        width: $width-sidebar;
     }
 
     &-posts {
-        position: absolute;
-        left: 24rem;
         height: 5000px;
-        width: 100%;
+        margin-left: $width-sidebar;
     }
 }

@@ -1,41 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import Button from './button';
+import { CloseIcon } from '@/icons/close-icon';
 
 interface ModalProps {
-  visible: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
+    visible?: boolean;
+    setVisible?: (value: boolean) => void;
+    onClose?: () => void;
+    title?: string;
+    children?: React.ReactNode;
+    className?: string;
 }
 
-const Modal = ({ visible, onClose, title, children }: ModalProps) => {
-  const [animationClass, setAnimationClass] = useState<string>('hide');
+const Modal = ({ visible, setVisible, onClose, title, children, className }: ModalProps) => {
+    const [animationClass, setAnimationClass] = useState<string>('hide');
+    useEffect(() => {
+        if (visible) {
+            setAnimationClass('show');
+        } else {
+            setAnimationClass('hide');
+        }
+    }, [visible]);
 
-  useEffect(() => {
-    if (visible) {
-      setAnimationClass('show');
-    } else {
-      setAnimationClass('hide');
-    }
-  }, [visible]);
-
-  const handleClose = () => {
-    setAnimationClass('hide');
-    setTimeout(() => onClose(), 300); // Wait for the animation to finish
-  };
-
-  return (
-    <div className={`modal ${animationClass}`}>
-      <div className="modal-content">
-        <div className="modal-header">
-          <h2>{title}</h2>
-          <button onClick={handleClose} className="close-button">
-            X
-          </button>
+    const handleClose = () => {
+        setAnimationClass('hide');
+        setVisible?.(false);
+        setTimeout(() => onClose?.(), 300); // Wait for the animation to finish
+    };
+    const modalClasses = [`modal ${animationClass}`, className].filter(Boolean);
+    return (
+        <div className={modalClasses.join(' ')}>
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h2 className="modal-title">{title}</h2>
+                    <Button onClick={handleClose} className="modal-closeBtn">
+                        <CloseIcon width="25" height="25" />
+                    </Button>
+                </div>
+                <div className="modal-body">{children}</div>
+            </div>
         </div>
-        <div className="modal-body">{children}</div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Modal;

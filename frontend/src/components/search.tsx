@@ -1,5 +1,6 @@
 import { SearchIcon } from '@/icons/search-icon';
 import Button from './button';
+import Input from './input';
 
 interface SearchProps {
     className?: string;
@@ -11,7 +12,7 @@ const Search = ({ className }: SearchProps) => {
     }
     return (
         <div className={searchClasses.join(' ')}>
-            <input type="text" placeholder="Search" className="search-text" />
+            <Input type="text" placeholder="Search" className="search-text" />
             <span className="search-spliter"></span>
             <Button className="search-btn">
                 <SearchIcon width="24" height="24" />

@@ -1,10 +1,11 @@
 'use client';
 import React, { Fragment } from 'react';
-import Navbar from './navbar';
+import Image from 'next/image';
 import Link from 'next/link';
-import avatar from '@/assets/images/avt.jpeg';
-import Button from './button';
 import { usePage } from '@/hooks/page.hook';
+import Button from './button';
+import Navbar from './navbar';
+import avatar from '@/assets/images/avt.jpeg';
 
 interface AccountItemProps {
     fullname: string;
@@ -84,7 +85,7 @@ const Sidebar = () => {
     const AccountItem = ({ fullname, username, avatar }: AccountItemProps) => (
         <Link href={`/@/${username}`} className="sidebar-accountLink">
             <div className="sidebar-avatarUser">
-                <img src={avatar} alt="avatar" />
+                <Image src={avatar} width={32} height={32} alt="avatar" />
             </div>
             <div className="sidebar-infoAccountContainer">
                 <h1 className="sidebar-titleUser">{username}</h1>

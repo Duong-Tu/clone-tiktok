@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react';
+import { Fragment } from 'react';
 import { CameraIcon } from '@/icons/camera-icon';
 import { CompassIcon } from '@/icons/compass-icon';
 import { GroupUserIcon } from '@/icons/group-user-icon';

@@ -4,13 +4,13 @@ import { ApolloError } from 'apollo-server-express';
 
 @Catch(BadRequestException)
 export class GraphQLErrorFilter implements GqlExceptionFilter {
-  catch(exception: BadRequestException, host: ArgumentsHost) {
-    const response = exception.getResponse();
+    catch(exception: BadRequestException, host: ArgumentsHost) {
+        const response = exception.getResponse();
 
-    if (typeof response === 'object') {
-      throw new ApolloError('Validation error', 'VALIDATION_ERROR', response);
-    } else {
-      throw new ApolloError('Bad request');
+        if (typeof response === 'object') {
+            throw new ApolloError('Validation error', 'VALIDATION_ERROR', response);
+        } else {
+            throw new ApolloError('Bad request');
+        }
     }
-  }
 }

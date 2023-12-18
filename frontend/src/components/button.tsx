@@ -9,7 +9,7 @@ interface ButtonProps {
     url?: string;
     htmlType?: 'button' | 'submit' | 'reset';
     loading?: boolean;
-    size?: 'small' | 'default' | 'large';
+    size?: 'small' | 'middle' | 'large';
     styles?: CSSProperties;
     type?: 'primary' | 'secondary' | 'default';
     shape?: 'round' | 'square';
@@ -44,9 +44,9 @@ const Button = ({
 
     if (danger) buttonClasses.push('btn-danger');
 
-    if (size) buttonClasses.push(`btn-size-${size}`);
+    if (size) buttonClasses.push(`btn-${size}`);
 
-    if (type) buttonClasses.push(`btn-type-${type}`);
+    if (type) buttonClasses.push(`btn-${type}`);
 
     if (shape === 'round') buttonClasses.push('btn-round');
 

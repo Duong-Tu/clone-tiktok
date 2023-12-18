@@ -1,18 +1,21 @@
 'use client';
+import { Fragment } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePage } from '@/hooks/page.hook';
 import Button from './button';
+import Search from './search';
 import { Logo } from '@/icons/logo';
 import { DesktopIcon } from '@/icons/desktop-icon';
 import { MessageIcon } from '@/icons/messages-icon';
 import { InboxIcon } from '@/icons/inbox-icon';
 import { PlusIcon } from '@/icons/plus-icon';
-import Search from './search';
+import { useUserStore } from '@/stores/user-store';
 import avtImg from '@/assets/images/avt.jpeg';
-import Link from 'next/link';
-import { Fragment } from 'react';
-import { usePage } from '@/hooks/page.hook';
 
 const Header: React.FC = () => {
     const { isUploadPage } = usePage();
+    const user = useUserStore((state) => state);
     return (
         <header className="header">
             <div className="header-left">
@@ -52,7 +55,7 @@ const Header: React.FC = () => {
                     </Fragment>
                 )}
                 <Button className="header-avt" shape="round">
-                    <img src={`${avtImg.src}`} alt="" />
+                    <Image width={32} height={32} src={`${avtImg.src}`} alt="avatar" />
                 </Button>
             </div>
         </header>
