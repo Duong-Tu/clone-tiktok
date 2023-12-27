@@ -83,7 +83,7 @@ const Sidebar = () => {
         },
     ];
     const AccountItem = ({ fullname, username, avatar }: AccountItemProps) => (
-        <Link href={`/@/${username}`} className="sidebar-accountLink">
+        <Link href="/" className="sidebar-accountLink">
             <div className="sidebar-avatarUser">
                 <Image src={avatar} width={32} height={32} alt="avatar" />
             </div>

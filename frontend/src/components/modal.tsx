@@ -4,14 +4,13 @@ import { CloseIcon } from '@/icons/close-icon';
 
 interface ModalProps {
     visible?: boolean;
-    setVisible?: (value: boolean) => void;
     onClose?: () => void;
     title?: string;
     children?: React.ReactNode;
     className?: string;
 }
 
-const Modal = ({ visible, setVisible, onClose, title, children, className }: ModalProps) => {
+const Modal = ({ visible, onClose, title, children, className }: ModalProps) => {
     const [animationClass, setAnimationClass] = useState<string>('hide');
     useEffect(() => {
         if (visible) {
@@ -23,7 +22,6 @@ const Modal = ({ visible, setVisible, onClose, title, children, className }: Mod
 
     const handleClose = () => {
         setAnimationClass('hide');
-        setVisible?.(false);
         setTimeout(() => onClose?.(), 300); // Wait for the animation to finish
     };
     const modalClasses = [`modal ${animationClass}`, className].filter(Boolean);

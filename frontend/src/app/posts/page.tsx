@@ -1,11 +1,7 @@
 import MainLayout from '@/components/main-layout';
 import styles from './posts.module.scss';
 const Posts = () => {
-  return (
-    <MainLayout>
-      <div className={styles['posts']}>Posts</div>
-    </MainLayout>
-  );
+    return <div className={styles['posts']}>Posts</div>;
 };
 
 export default Posts;

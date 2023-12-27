@@ -1,7 +1,10 @@
+'use client';
+import { Provider } from 'react-redux';
 import { ApolloWrapper } from '@/apollo-provider';
-import '@/scss/app.scss';
-import type { Metadata } from 'next';
+import MainLayout from '@/components/main-layout';
+import { reduxStore } from '@/redux/store';
 import { Roboto } from 'next/font/google';
+import '@/scss/app.scss';
 
 const inter = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -10,16 +13,19 @@ const inter = Roboto({
     subsets: ['latin', 'vietnamese'],
 });
 
-export const metadata: Metadata = {
-    title: 'Clone tiktok siêu vip pro',
-    description: 'Qúa đẳng cấp',
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <title>Titok</title>
+                <meta name="titok clone" content="titok clone" />
+            </head>
             <body className={inter.className}>
-                <ApolloWrapper>{children}</ApolloWrapper>
+                <ApolloWrapper>
+                    <Provider store={reduxStore}>
+                        <MainLayout>{children}</MainLayout>
+                    </Provider>
+                </ApolloWrapper>
             </body>
         </html>
     );

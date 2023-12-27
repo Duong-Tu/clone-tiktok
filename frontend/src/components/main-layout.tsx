@@ -1,14 +1,13 @@
-import { ReactNode } from 'react';
+'use client';
+import { ReactNode, useEffect } from 'react';
 import Header from './header';
 import Sidebar from './sidebar';
-import Login from './login';
-import Register from './register';
+import Auth from './auth';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
-    const isLogin = false;
     return (
         <div className="mainLayout">
-            {isLogin ? <Login /> : <Register />}
+            <Auth />
             <div className="mainLayout-header">
                 <Header />
             </div>

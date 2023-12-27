@@ -10,12 +10,10 @@ import { DesktopIcon } from '@/icons/desktop-icon';
 import { MessageIcon } from '@/icons/messages-icon';
 import { InboxIcon } from '@/icons/inbox-icon';
 import { PlusIcon } from '@/icons/plus-icon';
-import { useUserStore } from '@/stores/user-store';
 import avtImg from '@/assets/images/avt.jpeg';
 
 const Header: React.FC = () => {
     const { isUploadPage } = usePage();
-    const user = useUserStore((state) => state);
     return (
         <header className="header">
             <div className="header-left">

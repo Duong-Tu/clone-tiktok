@@ -19,6 +19,7 @@ type InputProps = {
     type?: 'text' | 'password' | 'email' | 'number';
     value?: string;
     placeholder?: string;
+    error?: string;
     onChange?: (value: string) => void;
     onPressEnter?: () => void;
 };
@@ -41,6 +42,7 @@ const Input = ({
     type = 'text',
     value,
     placeholder,
+    error,
     onChange,
     onPressEnter,
 }: InputProps) => {
@@ -64,7 +66,6 @@ const Input = ({
             onChange('');
         }
     };
-
     return (
         <div className={className}>
             {addonBefore && <span>{addonBefore}</span>}
@@ -87,6 +88,7 @@ const Input = ({
             {showCount && count !== undefined && (
                 <span>{value ? `${value.length}/${count}` : `0/${count}`}</span>
             )}
+            {error && <div className="input-error">{error}</div>}
         </div>
     );
 };
