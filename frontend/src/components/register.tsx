@@ -75,7 +75,12 @@ const Register = ({ setVisible }: RegisterProps) => {
     return (
         <Fragment>
             {loading && <Spinner className="loading" />}
-            <Modal visible={true} title="Sign up for TikTok" onClose={handleClose}>
+            <Modal
+                className="register"
+                visible={true}
+                title="Sign up for TikTok"
+                onClose={handleClose}
+            >
                 <form className="register-form" onSubmit={handleRegister}>
                     <Input
                         className="register-form-text"

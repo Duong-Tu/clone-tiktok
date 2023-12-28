@@ -9,6 +9,7 @@ export type GeneralState = {
     isBackUrl: string;
     posts: null;
     suggested: null;
+    isLoading: boolean;
 };
 
 const generalSlice = createSlice({
@@ -22,8 +23,12 @@ const generalSlice = createSlice({
         isBackUrl: '/',
         posts: null,
         suggested: null,
+        isLoading: true,
     },
     reducers: {
+        setIsLoading: (state, action) => {
+            state.isLoading = action.payload;
+        },
         setIsLoginOpen: (state, action) => {
             state.isLoginOpen = action.payload;
         },
@@ -36,5 +41,6 @@ const generalSlice = createSlice({
     },
 });
 
-export const { setIsLoginOpen, setIsRegisterOpen, setIsEditProfileOpen } = generalSlice.actions;
+export const { setIsLoginOpen, setIsRegisterOpen, setIsEditProfileOpen, setIsLoading } =
+    generalSlice.actions;
 export default generalSlice.reducer;

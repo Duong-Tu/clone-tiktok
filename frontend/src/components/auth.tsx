@@ -4,10 +4,13 @@ import { RootState } from '@/redux/root-reducers';
 import Register from './register';
 import Login from './login';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginOpen } from '@/redux/slicers/general.slice';
+import { setIsLoading, setIsLoginOpen } from '@/redux/slicers/general.slice';
+import { Spinner } from './spinner';
 
 const Auth = () => {
-    const { isLoginOpen, isRegisterOpen } = useSelector((state: RootState) => state.general);
+    const { isLoginOpen, isRegisterOpen, isLoading } = useSelector(
+        (state: RootState) => state.general,
+    );
     const [visible, setVisible] = useState<boolean>(false);
     const dispatch = useDispatch();
 
@@ -15,6 +18,7 @@ const Auth = () => {
         const isLogged = !!localStorage.getItem('user');
         if (!isLogged) {
             dispatch(setIsLoginOpen(true));
+            dispatch(setIsLoading(false));
         }
     }, [dispatch]);
 
@@ -22,7 +26,9 @@ const Auth = () => {
         setVisible(isLoginOpen || isRegisterOpen);
     }, [isLoginOpen, isRegisterOpen]);
 
-    return visible ? (
+    return isLoading ? (
+        <Spinner className="loading" />
+    ) : visible ? (
         <div className="overlay">
             <div className="authLayout">
                 <div className="authLayout-container">

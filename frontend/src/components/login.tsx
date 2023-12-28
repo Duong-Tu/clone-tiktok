@@ -32,11 +32,11 @@ const Login = ({ setVisible }: LoginProps) => {
             title: 'Use QR code',
         },
         {
-            icon: <UserIcon width="20" height="20" />,
+            icon: <FacebookIcon width="20" height="20" />,
             title: 'Use phone / email / username',
         },
         {
-            icon: <FacebookIcon width="20" height="20" />,
+            icon: <UserIcon width="20" height="20" />,
             title: 'Continue with Facebook',
         },
         {
