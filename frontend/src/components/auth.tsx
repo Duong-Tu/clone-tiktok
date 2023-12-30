@@ -6,25 +6,26 @@ import Login from './login';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading, setIsLoginOpen } from '@/redux/slicers/general.slice';
 import { Spinner } from './spinner';
+import Modal from './modal';
 
 const Auth = () => {
-    const { isLoginOpen, isRegisterOpen, isLoading } = useSelector(
-        (state: RootState) => state.general,
-    );
+    const { isLoginOpen, isLoading } = useSelector((state: RootState) => state.general);
     const [visible, setVisible] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>('Log in to TikTok');
     const dispatch = useDispatch();
 
     useEffect(() => {
         const isLogged = !!localStorage.getItem('user');
         if (!isLogged) {
             dispatch(setIsLoginOpen(true));
-            dispatch(setIsLoading(false));
+            setVisible(true);
         }
+        dispatch(setIsLoading(false));
     }, [dispatch]);
 
-    useEffect(() => {
-        setVisible(isLoginOpen || isRegisterOpen);
-    }, [isLoginOpen, isRegisterOpen]);
+    const handleClose = () => {
+        setVisible(false);
+    };
 
     return isLoading ? (
         <Spinner className="loading" />
@@ -32,8 +33,13 @@ const Auth = () => {
         <div className="overlay">
             <div className="authLayout">
                 <div className="authLayout-container">
-                    {isLoginOpen && <Login setVisible={setVisible} />}
-                    {isRegisterOpen && <Register setVisible={setVisible} />}
+                    <Modal visible={visible} title={title} onClose={handleClose}>
+                        {isLoginOpen ? (
+                            <Login setTitle={setTitle} />
+                        ) : (
+                            <Register setVisible={setVisible} />
+                        )}
+                    </Modal>
                 </div>
             </div>
         </div>

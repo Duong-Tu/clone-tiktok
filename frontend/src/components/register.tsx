@@ -1,11 +1,10 @@
 'use client';
 import { FormEvent, Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsLoginOpen, setIsRegisterOpen } from '@/redux/slicers/general.slice';
+import { setIsLoginOpen } from '@/redux/slicers/general.slice';
 import { REGISTER_USER } from '../graphql/mutations/register';
 import { useMutation } from '@apollo/client';
 import { setUser } from '@/redux/slicers/user.slice ';
-import Modal from './modal';
 import Input from './input';
 import Button from './button';
 import { Spinner } from './spinner';
@@ -37,6 +36,7 @@ const Register = ({ setVisible }: RegisterProps) => {
             });
             if (dataUser) {
                 dispatch(setUser(dataUser.register.user));
+                dispatch(setIsLoginOpen(false));
                 setVisible(false);
             }
         } catch (error: any) {
@@ -69,65 +69,54 @@ const Register = ({ setVisible }: RegisterProps) => {
         }
     };
 
-    const handleClose = () => {
-        setVisible(false);
-    };
     return (
         <Fragment>
             {loading && <Spinner className="loading" />}
-            <Modal
-                className="register"
-                visible={true}
-                title="Sign up for TikTok"
-                onClose={handleClose}
-            >
-                <form className="register-form" onSubmit={handleRegister}>
-                    <Input
-                        className="register-form-text"
-                        placeholder="Fullname"
-                        error={errors['fullname']}
-                        onChange={(value) => setRegisterData({ ...registerData, fullName: value })}
-                    />
-                    <Input
-                        type="email"
-                        className="register-form-text"
-                        placeholder="email"
-                        error={errors['email']}
-                        onChange={(value) => setRegisterData({ ...registerData, email: value })}
-                    />
-                    <Input
-                        type="password"
-                        className="register-form-text"
-                        placeholder="password"
-                        error={errors['password']}
-                        onChange={(value) => setRegisterData({ ...registerData, password: value })}
-                    />
-                    <Input
-                        type="password"
-                        className="register-form-text"
-                        placeholder="confirm password"
-                        error={errors['confirmPassword']}
-                        onChange={(value) =>
-                            setRegisterData({ ...registerData, confirmPassword: value })
-                        }
-                    />
-                    <Button htmlType="submit" size="middle" className="register-submitBtn">
-                        Sign up
-                    </Button>
-                </form>
-                <div className="register-footer">
-                    Already have an account?
-                    <Button
-                        onClick={() => {
-                            dispatch(setIsLoginOpen(true));
-                            dispatch(setIsRegisterOpen(false));
-                        }}
-                        className="register-loginBtnSwitch"
-                    >
-                        Sign in
-                    </Button>
-                </div>
-            </Modal>
+            <form className="register-form" onSubmit={handleRegister}>
+                <Input
+                    className="register-form-text"
+                    placeholder="Fullname"
+                    error={errors['fullname']}
+                    onChange={(value) => setRegisterData({ ...registerData, fullName: value })}
+                />
+                <Input
+                    type="email"
+                    className="register-form-text"
+                    placeholder="email"
+                    error={errors['email']}
+                    onChange={(value) => setRegisterData({ ...registerData, email: value })}
+                />
+                <Input
+                    type="password"
+                    className="register-form-text"
+                    placeholder="password"
+                    error={errors['password']}
+                    onChange={(value) => setRegisterData({ ...registerData, password: value })}
+                />
+                <Input
+                    type="password"
+                    className="register-form-text"
+                    placeholder="confirm password"
+                    error={errors['confirmPassword']}
+                    onChange={(value) =>
+                        setRegisterData({ ...registerData, confirmPassword: value })
+                    }
+                />
+                <Button htmlType="submit" size="middle" className="register-submitBtn">
+                    Sign up
+                </Button>
+            </form>
+            <div className="register-footer">
+                Already have an account?
+                <Button
+                    onClick={() => {
+                        dispatch(setIsLoginOpen(true));
+                    }}
+                    className="register-loginBtnSwitch"
+                >
+                    Sign in
+                </Button>
+            </div>
         </Fragment>
     );
 };

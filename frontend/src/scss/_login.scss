@@ -7,11 +7,9 @@
         padding: 1.6rem 4.8rem 0;
         overflow-y: scroll;
     }
+
     &-item {
         cursor: pointer;
-        &:hover {
-            opacity: 0.85;
-        }
         margin-bottom: 1.6rem;
     }
     &-item:last-child {
@@ -47,7 +45,33 @@
             text-decoration: underline;
         }
     }
+    &-backBtn {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        padding: 0;
+    }
 }
+.loginForm {
+    &-form {
+        padding: 2rem 4.8rem;
+    }
+    &-textField {
+        margin-bottom: 1.2rem;
+    }
+    &-textField:last-child {
+        margin-bottom: 0;
+        input {
+            border-radius: 0.6rem;
+        }
+    }
+    &-submitBtn {
+        background: $primary-color;
+        color: $white-color;
+        margin: 0 auto;
+    }
+}
+
 .item {
     display: flex;
     align-items: center;
@@ -55,6 +79,7 @@
     padding: 1.2rem;
     border: 1px solid rgba(22, 24, 35, 0.12);
     border-radius: 2px;
+    width: 100%;
     &-icon {
         width: 1.8rem;
         height: 1.8rem;

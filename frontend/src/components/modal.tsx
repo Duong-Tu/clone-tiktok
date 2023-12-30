@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from './button';
 import { CloseIcon } from '@/icons/close-icon';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/root-reducers';
 
 interface ModalProps {
     visible?: boolean;
@@ -14,17 +12,10 @@ interface ModalProps {
 
 const Modal = ({ visible, onClose, title, children, className }: ModalProps) => {
     const [animationClass, setAnimationClass] = useState<string>('hide');
-    const isRegisterOpen = useSelector((state: RootState) => state.general.isRegisterOpen);
 
     useEffect(() => {
         setAnimationClass(visible ? 'show' : 'hide');
     }, [visible]);
-
-    useEffect(() => {
-        if (isRegisterOpen) {
-            setAnimationClass('');
-        }
-    }, [isRegisterOpen]);
 
     const handleClose = () => {
         setAnimationClass('hide');

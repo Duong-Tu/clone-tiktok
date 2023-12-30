@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export type GeneralState = {
     isLoginOpen: boolean;
-    isRegisterOpen: boolean;
     isEditProfileOpen: boolean;
     selectedPosts: null;
     ids: null;
@@ -16,7 +15,6 @@ const generalSlice = createSlice({
     name: 'general',
     initialState: {
         isLoginOpen: false,
-        isRegisterOpen: false,
         isEditProfileOpen: false,
         selectedPosts: null,
         ids: null,
@@ -32,15 +30,12 @@ const generalSlice = createSlice({
         setIsLoginOpen: (state, action) => {
             state.isLoginOpen = action.payload;
         },
-        setIsRegisterOpen: (state, action) => {
-            state.isRegisterOpen = action.payload;
-        },
+
         setIsEditProfileOpen: (state) => {
             state.isEditProfileOpen = !state.isEditProfileOpen;
         },
     },
 });
 
-export const { setIsLoginOpen, setIsRegisterOpen, setIsEditProfileOpen, setIsLoading } =
-    generalSlice.actions;
+export const { setIsLoginOpen, setIsEditProfileOpen, setIsLoading } = generalSlice.actions;
 export default generalSlice.reducer;
