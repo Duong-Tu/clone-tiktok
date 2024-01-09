@@ -59,6 +59,11 @@
             background: $gray-color;
         }
     }
+    &-btnLogin {
+        font-weight: 600;
+        height: 3.4rem;
+        width: 10rem;
+    }
     &-btnIconOnly {
         background: none;
         border: none;

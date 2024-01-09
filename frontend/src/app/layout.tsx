@@ -5,6 +5,7 @@ import MainLayout from '@/components/main-layout';
 import { reduxStore } from '@/redux/store';
 import { Roboto } from 'next/font/google';
 import '@/scss/app.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -21,11 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="titok clone" content="titok clone" />
             </head>
             <body className={inter.className}>
-                <ApolloWrapper>
-                    <Provider store={reduxStore}>
+                <Provider store={reduxStore}>
+                    <ApolloWrapper>
                         <MainLayout>{children}</MainLayout>
-                    </Provider>
-                </ApolloWrapper>
+                    </ApolloWrapper>
+                </Provider>
             </body>
         </html>
     );

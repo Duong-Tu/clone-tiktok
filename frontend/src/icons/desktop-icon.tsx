@@ -2,7 +2,7 @@ export const DesktopIcon = ({ width, height, fontSize }: IconProperties) => {
     return (
         <svg
             fill="currentColor"
-            fontSize={fontSize} //26px
+            fontSize={fontSize}
             viewBox="0 0 48 48"
             xmlns="http://www.w3.org/2000/svg"
             width={width}

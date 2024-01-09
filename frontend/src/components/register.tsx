@@ -1,21 +1,21 @@
 'use client';
-import { FormEvent, Fragment, useState } from 'react';
+import { FormEvent, Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsLoginOpen } from '@/redux/slicers/general.slice';
-import { REGISTER_USER } from '../graphql/mutations/register';
-import { useMutation } from '@apollo/client';
-import { setUser } from '@/redux/slicers/user.slice ';
+import { setIsLoginOpen, setMessage } from '@/redux/slicers/general.slice';
 import Input from './input';
 import Button from './button';
 import { Spinner } from './spinner';
+import { useRegisterUser } from '@/hooks/user.hook';
+import { setUser } from '@/redux/slicers/user.slice ';
+import { useGraphQLErrorHandler } from '@/hooks/validate.hook';
 
 type RegisterProps = {
     setVisible: (value: boolean) => void;
 };
 const Register = ({ setVisible }: RegisterProps) => {
     const dispatch = useDispatch();
-    const [registerUser, { loading }] = useMutation(REGISTER_USER);
-    const [errors, setErrors] = useState<Record<string, string>>({});
+    const { registerUser, data, loading, error } = useRegisterUser();
+    const { errors, handleGraphQLError, clearErrors } = useGraphQLErrorHandler();
     const [registerData, setRegisterData] = useState({
         email: '',
         password: '',
@@ -23,52 +23,26 @@ const Register = ({ setVisible }: RegisterProps) => {
         confirmPassword: '',
     });
     const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+        clearErrors();
         e.preventDefault();
-        try {
-            setErrors({});
-            const { data: dataUser } = await registerUser({
-                variables: {
-                    email: registerData.email,
-                    password: registerData.password,
-                    fullname: registerData.fullName,
-                    confirmPassword: registerData.confirmPassword,
-                },
-            });
-            if (dataUser) {
-                dispatch(setUser(dataUser.register.user));
-                dispatch(setIsLoginOpen(false));
-                setVisible(false);
-            }
-        } catch (error: any) {
-            const allErrors: Record<string, string> = {};
-            if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-                error.graphQLErrors.forEach((graphQLError: any) => {
-                    const extensions = graphQLError.extensions;
-                    if (extensions?.code) {
-                        allErrors['code'] = extensions.code || graphQLError.message;
-                    }
-                    if (extensions?.fullname) {
-                        allErrors['fullname'] = extensions.fullname;
-                    }
-                    if (extensions?.email) {
-                        allErrors['email'] = extensions.email;
-                    }
-                    if (extensions?.password) {
-                        allErrors['password'] = extensions.password;
-                    }
-                    if (extensions?.confirmPassword) {
-                        allErrors['confirmPassword'] = extensions.confirmPassword;
-                    }
-                });
-            }
-
-            setErrors((prevErrors) => ({
-                ...prevErrors,
-                ...allErrors,
-            }));
-        }
+        await registerUser(registerData);
     };
 
+    useEffect(() => {
+        if (error) {
+            dispatch(setMessage({ type: 'error', text: error.message }));
+            handleGraphQLError(error);
+        }
+    }, [error]);
+
+    useEffect(() => {
+        if (data) {
+            dispatch(setUser(data));
+            dispatch(setIsLoginOpen(false));
+            setVisible(false);
+            dispatch(setMessage({ type: 'success', text: 'Registration successful' }));
+        }
+    }, [data]);
     return (
         <Fragment>
             {loading && <Spinner className="loading" />}
@@ -102,8 +76,13 @@ const Register = ({ setVisible }: RegisterProps) => {
                         setRegisterData({ ...registerData, confirmPassword: value })
                     }
                 />
-                <Button htmlType="submit" size="middle" className="register-submitBtn">
-                    Sign up
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="middle"
+                    className="register-submitBtn"
+                >
+                    <span>Sign up</span>
                 </Button>
             </form>
             <div className="register-footer">

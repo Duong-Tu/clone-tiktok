@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment, ReactNode, useState } from 'react';
+import React, { Fragment, ReactElement, ReactNode, useEffect, useState } from 'react';
 import Button from '../button';
 import FormLogin from './form-login';
 
@@ -19,70 +19,85 @@ import { ArrowRightIcon } from '@/icons/arrow-right-icon';
 type LoginItem = {
     icon?: ReactNode;
     title: string;
+    content?: ReactElement;
     children?: { title: string; content: React.ReactNode };
     handleClick?: () => void;
 };
 
 type LoginProps = {
     setTitle: (value: string) => void;
+    setVisible: (value: boolean) => void;
 };
 
 const loginList: LoginItem[] = [
     {
-        icon: <QRCodeIcon width="20" height="20" />,
-        title: 'Use QR code',
-    },
-    {
-        icon: <FacebookIcon width="20" height="20" />,
+        icon: <FacebookIcon width="18" height="18" />,
         title: 'Use phone / email / username',
         children: { title: 'Login', content: <FormLogin /> },
     },
     {
-        icon: <UserIcon width="20" height="20" />,
+        icon: <QRCodeIcon width="18" height="18" />,
+        title: 'Use QR code',
+    },
+    {
+        icon: <UserIcon width="18" height="18" />,
         title: 'Continue with Facebook',
     },
     {
-        icon: <GoogleIcon width="20" height="20" />,
+        icon: <GoogleIcon width="18" height="18" />,
         title: 'Continue with Google',
     },
     {
-        icon: <TwitterIcon width="20" height="20" />,
+        icon: <TwitterIcon width="18" height="18" />,
         title: 'Continue with Twitter',
     },
     {
-        icon: <LineIcon width="20" height="20" />,
+        icon: <LineIcon width="18" height="18" />,
         title: 'Continue with LINE',
     },
     {
-        icon: <KakaoTalkIcon width="20" height="20" />,
+        icon: <KakaoTalkIcon width="18" height="18" />,
         title: 'Continue with KakaoTalk',
     },
     {
-        icon: <AppleIcon width="20" height="20" />,
+        icon: <AppleIcon width="18" height="18" />,
         title: 'Continue with Apple',
     },
 ];
 
-const Login = ({ setTitle }: LoginProps) => {
+const Login = ({ setTitle, setVisible }: LoginProps) => {
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState<LoginItem | null>(null);
     const handleSelectLoginItem = (item: LoginItem) => {
-        setSelectedItem(item);
-        setTitle(item.children?.title || item.title);
+        if (item.children) {
+            setSelectedItem(item);
+        } else {
+            alert('Please select login by email');
+        }
     };
 
     const handleBackButtonClick = () => {
         setSelectedItem(null);
-        setTitle('Log in to TikTok');
     };
+
+    useEffect(() => {
+        if (selectedItem?.children) {
+            setTitle(selectedItem.children.title);
+        } else {
+            setTitle('Log in to TikTok');
+        }
+    }, [setTitle, selectedItem]);
+
     return (
         <div className="login">
             {selectedItem ? (
                 <div className="login-content">
                     <Button className="login-backBtn" onClick={handleBackButtonClick}>
-                        <ArrowRightIcon width="24" height="24" />
+                        <span>
+                            <ArrowRightIcon width="24" height="24" />
+                        </span>
                     </Button>
-                    {selectedItem?.children?.content || <h3>Please select login by email</h3>}
+                    {selectedItem?.children?.content}
                 </div>
             ) : (
                 <Fragment>
@@ -127,7 +142,7 @@ export default Login;
 
 const LoginItem = ({ icon, title, handleClick }: LoginItem) => (
     <Button className="item" onClick={handleClick}>
-        <span className="item-icon">{icon}</span>
+        {icon}
         <h4 className="item-title">{title}</h4>
     </Button>
 );

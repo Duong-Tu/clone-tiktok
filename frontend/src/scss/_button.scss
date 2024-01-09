@@ -6,7 +6,7 @@
     line-height: 1.8rem;
     font-weight: 500;
     border: none;
-    border-radius: 2px;
+    border-radius: 0.4rem;
     padding: 0.6rem 1.6rem;
     color: $text-color;
     &-round {
@@ -17,11 +17,26 @@
         color: $text-color;
     }
     &-middle {
-        width: 14rem;
-        padding: 1rem 0;
+        width: 12rem;
+        height: 4rem;
         border-radius: 0.6rem;
     }
+    &-large {
+        width: 16rem;
+        height: 5rem;
+        border-radius: 0.8rem;
+    }
+    &-primary {
+        background: $primary-color;
+        color: $white-color;
+    }
     &:hover {
-        opacity: 0.85;
+        opacity: 0.9;
+        &:hover {
+            > span {
+                margin-bottom: 0.1rem;
+                transition: margin-bottom 0.3s ease-in;
+            }
+        }
     }
 }

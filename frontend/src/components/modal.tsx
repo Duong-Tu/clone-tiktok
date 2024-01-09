@@ -29,7 +29,9 @@ const Modal = ({ visible, onClose, title, children, className }: ModalProps) => 
                 <div className="modal-header">
                     <h2 className="modal-title">{title}</h2>
                     <Button onClick={handleClose} className="modal-closeBtn">
-                        <CloseIcon width="25" height="25" />
+                        <span>
+                            <CloseIcon width="25" height="25" />
+                        </span>
                     </Button>
                 </div>
                 <div className="modal-body">{children}</div>

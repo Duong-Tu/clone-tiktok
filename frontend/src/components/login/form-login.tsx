@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '@/graphql/mutations/login';
 import Input from '../input';
 import Button from '../button';
+import { setUser } from '@/redux/slicers/user.slice ';
+import { useDispatch } from 'react-redux';
 
 const FormLogin = () => {
     const [loginData, setLoginData] = useState({
@@ -11,6 +13,7 @@ const FormLogin = () => {
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loginUser, { loading }] = useMutation(LOGIN_USER);
+    const dispatch = useDispatch();
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,7 +25,9 @@ const FormLogin = () => {
                     password: loginData.password,
                 },
             });
-            if (dataUser) {
+
+            if (dataUser.login.user) {
+                dispatch(setUser(dataUser.login.user));
             }
         } catch (error) {}
     };
@@ -44,8 +49,13 @@ const FormLogin = () => {
                     onChange={(value) => setLoginData({ ...loginData, password: value })}
                 />
 
-                <Button htmlType="submit" size="middle" className="loginForm-submitBtn">
-                    Sign in
+                <Button
+                    htmlType="submit"
+                    size="middle"
+                    type="primary"
+                    className="loginForm-submitBtn"
+                >
+                    <span>Sign in</span>
                 </Button>
             </form>
         </div>

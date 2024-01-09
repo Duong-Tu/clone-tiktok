@@ -7,13 +7,22 @@ const config: CodegenConfig = {
     generates: {
         './src/gql/': {
             preset: 'client',
-            plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+            plugins: [
+                {
+                    typescript: {},
+                    'typescript-operations': {},
+                    'typescript-react-apollo': {},
+                },
+            ],
             config: {
                 withHooks: true,
                 withHOC: false,
                 withComponent: false,
             },
         },
+    },
+    config: {
+        apolloClientVersion: 3, // Đảm bảo sử dụng Apollo Client phiên bản 3
     },
 };
 

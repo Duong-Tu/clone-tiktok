@@ -10,3 +10,9 @@ export const GET_USERS = gql`
         }
     }
 `;
+
+export const CHECK_USER_LOGGED_IN = gql`
+    query checkUserLoggedIn {
+        checkUserLoggedIn
+    }
+`;
