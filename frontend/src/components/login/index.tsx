@@ -29,43 +29,43 @@ type LoginProps = {
     setVisible: (value: boolean) => void;
 };
 
-const loginList: LoginItem[] = [
-    {
-        icon: <FacebookIcon width="18" height="18" />,
-        title: 'Use phone / email / username',
-        children: { title: 'Login', content: <FormLogin /> },
-    },
-    {
-        icon: <QRCodeIcon width="18" height="18" />,
-        title: 'Use QR code',
-    },
-    {
-        icon: <UserIcon width="18" height="18" />,
-        title: 'Continue with Facebook',
-    },
-    {
-        icon: <GoogleIcon width="18" height="18" />,
-        title: 'Continue with Google',
-    },
-    {
-        icon: <TwitterIcon width="18" height="18" />,
-        title: 'Continue with Twitter',
-    },
-    {
-        icon: <LineIcon width="18" height="18" />,
-        title: 'Continue with LINE',
-    },
-    {
-        icon: <KakaoTalkIcon width="18" height="18" />,
-        title: 'Continue with KakaoTalk',
-    },
-    {
-        icon: <AppleIcon width="18" height="18" />,
-        title: 'Continue with Apple',
-    },
-];
-
 const Login = ({ setTitle, setVisible }: LoginProps) => {
+    const loginList: LoginItem[] = [
+        {
+            icon: <FacebookIcon width="18" height="18" />,
+            title: 'Use phone / email / username',
+            children: { title: 'Login', content: <FormLogin setVisible={setVisible} /> },
+        },
+        {
+            icon: <QRCodeIcon width="18" height="18" />,
+            title: 'Use QR code',
+        },
+        {
+            icon: <UserIcon width="18" height="18" />,
+            title: 'Continue with Facebook',
+        },
+        {
+            icon: <GoogleIcon width="18" height="18" />,
+            title: 'Continue with Google',
+        },
+        {
+            icon: <TwitterIcon width="18" height="18" />,
+            title: 'Continue with Twitter',
+        },
+        {
+            icon: <LineIcon width="18" height="18" />,
+            title: 'Continue with LINE',
+        },
+        {
+            icon: <KakaoTalkIcon width="18" height="18" />,
+            title: 'Continue with KakaoTalk',
+        },
+        {
+            icon: <AppleIcon width="18" height="18" />,
+            title: 'Continue with Apple',
+        },
+    ];
+
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState<LoginItem | null>(null);
     const handleSelectLoginItem = (item: LoginItem) => {

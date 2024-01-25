@@ -1,38 +1,51 @@
-import React, { FormEvent, useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '@/graphql/mutations/login';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useGraphQLErrorHandler } from '@/hooks/validate.hook';
+import { useLoginUser } from '@/hooks/user.hook';
 import Input from '../input';
 import Button from '../button';
+import { Spinner } from '../spinner';
+import { setIsLoginOpen, setMessage } from '@/redux/slicers/general.slice';
 import { setUser } from '@/redux/slicers/user.slice ';
-import { useDispatch } from 'react-redux';
 
-const FormLogin = () => {
+type FormLoginProps = {
+    setVisible: (value: boolean) => void;
+};
+const FormLogin = ({ setVisible }: FormLoginProps) => {
+    const dispatch = useDispatch();
+    const { loginUser, data, loading, error } = useLoginUser();
+    const { errors, handleGraphQLError, clearErrors } = useGraphQLErrorHandler();
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     });
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const [loginUser, { loading }] = useMutation(LOGIN_USER);
-    const dispatch = useDispatch();
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+        console.log('hello');
         e.preventDefault();
-        try {
-            setErrors({});
-            const { data: dataUser } = await loginUser({
-                variables: {
-                    email: loginData.email,
-                    password: loginData.password,
-                },
-            });
-
-            if (dataUser.login.user) {
-                dispatch(setUser(dataUser.login.user));
-            }
-        } catch (error) {}
+        clearErrors();
+        await loginUser(loginData);
     };
+
+    useEffect(() => {
+        if (error) {
+            dispatch(setMessage({ type: 'error', text: error.message }));
+            handleGraphQLError(error);
+        }
+    }, [error, dispatch, handleGraphQLError]);
+
+    useEffect(() => {
+        if (data) {
+            dispatch(setUser(data));
+            dispatch(setIsLoginOpen(false));
+            setVisible(false);
+            dispatch(setMessage({ type: 'success', text: 'Login successful' }));
+        }
+    }, [data, setVisible, dispatch]);
+
     return (
         <div className="loginForm">
+            {loading && <Spinner className="loading" />}
             <form className="loginForm-form" onSubmit={handleLogin}>
                 <Input
                     type="email"

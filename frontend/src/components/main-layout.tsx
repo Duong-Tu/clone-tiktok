@@ -1,24 +1,41 @@
 'use client';
 import { ReactNode, useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/auth.hook';
 import Header from './header';
 import Sidebar from './sidebar';
 import Auth from './auth';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/root-reducers';
 import { ToastContainer, toast } from 'react-toastify';
+import { setIsLoading, setIsLoginOpen } from '@/redux/slicers/general.slice';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
-    const [visible, setVisible] = useState(false);
     const message = useSelector((state: RootState) => state.general.message);
+    const { isLogged } = useAuth();
+    const dispatch = useDispatch();
+    const [visible, setVisible] = useState(false);
+
     useEffect(() => {
         if (message) {
             toast(message.text, { type: message.type });
         }
     }, [message]);
+
+    useEffect(() => {
+        if (isLogged) {
+            setVisible(false);
+        } else {
+            dispatch(setIsLoginOpen(true));
+            setVisible(true);
+        }
+        dispatch(setIsLoading(false));
+    }, [dispatch, setVisible, isLogged]);
+
     return (
         <div className="mainLayout">
             <ToastContainer />
-            <Auth visible={visible} setVisible={setVisible} />
+            {!isLogged && <Auth visible={visible} setVisible={setVisible} />}
+
             <div className="mainLayout-header">
                 <Header setVisible={setVisible} />
             </div>

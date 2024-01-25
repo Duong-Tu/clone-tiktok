@@ -1,20 +1,21 @@
 'use client';
 import { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { setIsLoginOpen } from '@/redux/slicers/general.slice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePage } from '@/hooks/page.hook';
+import { useAuth } from '@/hooks/auth.hook';
 import Button from './button';
 import Search from './search';
+import Tooltip from './tooltip';
 import { Logo } from '@/icons/logo';
 import { DesktopIcon } from '@/icons/desktop-icon';
 import { MessageIcon } from '@/icons/messages-icon';
 import { InboxIcon } from '@/icons/inbox-icon';
 import { PlusIcon } from '@/icons/plus-icon';
-import avtImg from '@/assets/images/avt.jpeg';
-import { useDispatch } from 'react-redux';
-import { setIsLoginOpen } from '@/redux/slicers/general.slice';
 import { EllipsisVerticalIcon } from '@/icons/ellipsis-vertical-icon';
-import { useAuth } from '@/hooks/auth.hook';
+import avtImg from '@/assets/images/avt.jpeg';
 
 type HeaderProps = {
     setVisible: (value: boolean) => void;
@@ -54,12 +55,16 @@ const Header = ({ setVisible }: HeaderProps) => {
 
                         {isLogged ? (
                             <Fragment>
-                                <Button className="header-btnIconOnly">
-                                    <MessageIcon width="26" height="26" />
-                                </Button>
-                                <Button className="header-btnIconOnly">
-                                    <InboxIcon width="32" height="32" />
-                                </Button>
+                                <Tooltip content="Message">
+                                    <Button className="header-btnIconOnly">
+                                        <MessageIcon width="26" height="26" />
+                                    </Button>
+                                </Tooltip>
+                                <Tooltip content="Inbox">
+                                    <Button className="header-btnIconOnly">
+                                        <InboxIcon width="32" height="32" />
+                                    </Button>
+                                </Tooltip>
                             </Fragment>
                         ) : (
                             <Button
@@ -75,15 +80,19 @@ const Header = ({ setVisible }: HeaderProps) => {
                         )}
                     </Fragment>
                 )}
-                <Button className="header-btnIconOnly">
-                    <DesktopIcon width="1em" height="1em" fontSize="26" />
-                </Button>
-                <Button className="header-btnIconOnly">
-                    <EllipsisVerticalIcon width="1em" height="1em" fontSize="26" />
-                </Button>
-                {isLogged && (
+                <Tooltip content="Download App">
+                    <Button className="header-btnIconOnly">
+                        <DesktopIcon width="1em" height="1em" fontSize="26" />
+                    </Button>
+                </Tooltip>
+
+                {isLogged ? (
                     <Button className="header-avt" shape="round">
                         <Image width={32} height={32} src={`${avtImg.src}`} alt="avatar" />
+                    </Button>
+                ) : (
+                    <Button className="header-btnIconOnly">
+                        <EllipsisVerticalIcon width="1em" height="1em" fontSize="26" />
                     </Button>
                 )}
             </div>

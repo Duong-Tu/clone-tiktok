@@ -1,13 +1,11 @@
 'use client';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { RootState } from '@/redux/root-reducers';
 import Register from './register';
 import Login from './login';
-import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoading, setIsLoginOpen } from '@/redux/slicers/general.slice';
+import { useSelector } from 'react-redux';
 import { Spinner } from './spinner';
 import Modal from './modal';
-import { useAuth } from '@/hooks/auth.hook';
 
 type AuthProps = {
     visible: boolean;
@@ -15,24 +13,11 @@ type AuthProps = {
 };
 const Auth = ({ visible, setVisible }: AuthProps) => {
     const { isLoginOpen, isLoading } = useSelector((state: RootState) => state.general);
-    const { id: userId } = useSelector((state: RootState) => state.user);
-    const { isLogged } = useAuth();
     const [title, setTitle] = useState<string>('');
-    const dispatch = useDispatch();
 
     const handleClose = () => {
         setVisible(false);
     };
-
-    useEffect(() => {
-        if (isLogged) {
-            setVisible(false);
-        } else {
-            dispatch(setIsLoginOpen(true));
-            setVisible(true);
-        }
-        dispatch(setIsLoading(false));
-    }, [dispatch, setVisible, userId, isLogged]);
 
     return isLoading ? (
         <Spinner className="loading" />

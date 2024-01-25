@@ -21,6 +21,9 @@ export class User {
     password: string;
 
     @Field()
+    token: string;
+
+    @Field()
     createdAt?: Date;
 
     @Field()

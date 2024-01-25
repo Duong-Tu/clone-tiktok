@@ -1,5 +1,5 @@
 import { ApolloError } from '@apollo/client/errors';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 interface GraphQLErrorHandlerHook {
     errors: Record<string, string>;
@@ -10,7 +10,7 @@ interface GraphQLErrorHandlerHook {
 export const useGraphQLErrorHandler = (): GraphQLErrorHandlerHook => {
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const handleGraphQLError = (error: ApolloError) => {
+    const handleGraphQLError = useCallback((error: ApolloError) => {
         const allErrors: Record<string, string> = {};
         if (error) {
             if (error.graphQLErrors && error.graphQLErrors.length > 0) {
@@ -23,11 +23,11 @@ export const useGraphQLErrorHandler = (): GraphQLErrorHandlerHook => {
             }
         }
         setErrors(allErrors);
-    };
+    }, []);
 
-    const clearErrors = (): void => {
+    const clearErrors = useCallback(() => {
         setErrors({});
-    };
+    }, []);
 
     return { errors, handleGraphQLError, clearErrors };
 };

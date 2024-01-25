@@ -2,12 +2,12 @@
 import { FormEvent, Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsLoginOpen, setMessage } from '@/redux/slicers/general.slice';
+import { setUser } from '@/redux/slicers/user.slice ';
+import { useRegisterUser } from '@/hooks/user.hook';
+import { useGraphQLErrorHandler } from '@/hooks/validate.hook';
 import Input from './input';
 import Button from './button';
 import { Spinner } from './spinner';
-import { useRegisterUser } from '@/hooks/user.hook';
-import { setUser } from '@/redux/slicers/user.slice ';
-import { useGraphQLErrorHandler } from '@/hooks/validate.hook';
 
 type RegisterProps = {
     setVisible: (value: boolean) => void;

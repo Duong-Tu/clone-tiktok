@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import CookieManager from '@/utils/cookies';
 
 const initialState: User = {
     id: undefined,
@@ -9,15 +8,13 @@ const initialState: User = {
     image: '',
 };
 
-const cookies = new CookieManager();
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<User>) => {
             const newUser = { ...state, ...action.payload };
-            const accessToken = cookies.get('access_token');
-            console.log({ accessToken });
+            const accessToken = newUser.token;
             if (accessToken) {
                 localStorage.setItem('access_token', accessToken);
             }

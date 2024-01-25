@@ -35,6 +35,7 @@ export class UserResolver {
         return this.authService.register(registerDto, context.res);
     }
 
+    @UseFilters(GraphQLErrorFilter)
     @Mutation(() => LoginResponse) // Adjust this return type as needed
     async login(@Args('loginInput') loginDto: LoginDto, @Context() context: { res: Response }) {
         return this.authService.login(loginDto, context.res);
