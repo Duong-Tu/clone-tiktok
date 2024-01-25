@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "next dev -p 7777",
         "build": "next build",
-        "start": "next start",
+        "start": "next start -p 7777",
         "lint": "next lint",
         "compile": "graphql-codegen",
         "watch": "graphql-codegen -w"
@@ -15,6 +15,7 @@
         "eslint": "8.50.0",
         "eslint-config-next": "13.5.2",
         "graphql": "^16.8.1",
+        "js-cookie": "^3.0.5",
         "next": "13.5.2",
         "next-redux-wrapper": "^8.1.0",
         "prettier": "^3.0.3",
@@ -32,6 +33,7 @@
         "@graphql-codegen/client-preset": "^4.1.0",
         "@graphql-codegen/typescript-react-apollo": "^4.1.0",
         "@types/extract-files": "^8.1.3",
+        "@types/js-cookie": "^3.0.3",
         "@types/node": "20.6.5",
         "@types/react": "18.2.22",
         "@types/react-dom": "18.2.7"

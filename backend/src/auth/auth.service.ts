@@ -74,7 +74,7 @@ export class AuthService {
             httpOnly: true,
         });
 
-        return { user };
+        return { user, token: accessToken };
     }
     async validateUser(loginDto: LoginDto): Promise<any> {
         const user = await this.prisma.user.findUnique({

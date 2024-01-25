@@ -22,11 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="titok clone" content="titok clone" />
             </head>
             <body className={inter.className}>
-                <Provider store={reduxStore}>
-                    <ApolloWrapper>
+                <ApolloWrapper>
+                    <Provider store={reduxStore}>
                         <MainLayout>{children}</MainLayout>
-                    </ApolloWrapper>
-                </Provider>
+                    </Provider>
+                </ApolloWrapper>
             </body>
         </html>
     );

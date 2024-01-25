@@ -33,7 +33,7 @@ const Register = ({ setVisible }: RegisterProps) => {
             dispatch(setMessage({ type: 'error', text: error.message }));
             handleGraphQLError(error);
         }
-    }, [error]);
+    }, [error, dispatch, handleGraphQLError]);
 
     useEffect(() => {
         if (data) {
@@ -42,7 +42,7 @@ const Register = ({ setVisible }: RegisterProps) => {
             setVisible(false);
             dispatch(setMessage({ type: 'success', text: 'Registration successful' }));
         }
-    }, [data]);
+    }, [data, setVisible, dispatch]);
     return (
         <Fragment>
             {loading && <Spinner className="loading" />}

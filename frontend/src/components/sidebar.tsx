@@ -15,71 +15,71 @@ interface AccountItemProps {
 
 const Sidebar = () => {
     const { isUploadPage } = usePage();
-    const accounts: User[] = [
+    const accounts: AccountItemProps[] = [
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
         {
             username: 'khanhanbolero2006',
             fullname: 'Khánh An Bolero',
-            avatarUrl: avatar.src,
+            avatar: avatar.src,
         },
     ];
     const AccountItem = ({ fullname, username, avatar }: AccountItemProps) => (
@@ -108,7 +108,7 @@ const Sidebar = () => {
                                     <AccountItem
                                         username={account.username}
                                         fullname={account.fullname}
-                                        avatar={account.avatarUrl}
+                                        avatar={account.avatar}
                                     />
                                 </li>
                             ))}

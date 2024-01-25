@@ -12,7 +12,7 @@ import {
 } from '@apollo/experimental-nextjs-app-support/ssr';
 import { onError } from '@apollo/client/link/error';
 
-async function refreshToken(client: ApolloClient<NormalizedCacheObject>) {
+export async function refreshToken(client: ApolloClient<NormalizedCacheObject>) {
     try {
         const { data } = await client.mutate({
             mutation: gql`
@@ -47,7 +47,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
                 retryCount++;
 
                 return new Observable((observer) => {
-                    refreshToken(client())
+                    refreshToken(makeClient())
                         .then((token) => {
                             console.log('token', token);
                             operation.setContext((previousContext: any) => ({
@@ -74,7 +74,7 @@ const uploadLink = new HttpLink({
     },
 });
 
-export function client() {
+export function makeClient() {
     return new NextSSRApolloClient({
         cache: new NextSSRInMemoryCache({
             typePolicies: {

@@ -6,13 +6,13 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'src/prisma.service';
 
 @Module({
-  imports: [
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      global: true,
-    }),
-  ],
-  providers: [AuthService, JwtService, ConfigService, PrismaService],
-  exports: [JwtService, AuthService],
+    imports: [
+        JwtModule.register({
+            secret: jwtConstants.secret,
+            global: true,
+        }),
+    ],
+    providers: [AuthService, JwtService, ConfigService, PrismaService],
+    exports: [JwtService, AuthService],
 })
 export class AuthModule {}

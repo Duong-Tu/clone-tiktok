@@ -3,33 +3,33 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService) {}
 
-  async getUsers() {
-    return this.prisma.user.findMany({
-      include: {
-        posts: true,
-      },
-    });
-  }
+    async getUsers() {
+        return this.prisma.user.findMany({
+            include: {
+                posts: true,
+            },
+        });
+    }
 
-  async updateProfile(
-    userId: number,
-    data: {
-      fullname?: string;
-      image?: string;
-      bio?: string;
-    },
-  ) {
-    return this.prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        fullname: data.fullname,
-        bio: data.bio,
-        image: data.image,
-      },
-    });
-  }
+    async updateProfile(
+        userId: number,
+        data: {
+            fullname?: string;
+            image?: string;
+            bio?: string;
+        },
+    ) {
+        return this.prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                fullname: data.fullname,
+                bio: data.bio,
+                image: data.image,
+            },
+        });
+    }
 }

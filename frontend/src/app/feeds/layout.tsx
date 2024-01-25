@@ -1,8 +1,7 @@
-import ProtectedRoute from '@/route/protected-route';
 import { ReactElement } from 'react';
 
 const FeedLayout = ({ children }: { children: ReactElement }) => {
-  return <ProtectedRoute>{children}</ProtectedRoute>;
+    return <div>{children}</div>;
 };
 
 export default FeedLayout;
